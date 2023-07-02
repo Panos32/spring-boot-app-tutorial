@@ -1,7 +1,6 @@
 package dev.panos.contentcalendar.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import dev.panos.contentcalendar.model.Content;
-import dev.repository.ContentCollectionRepository;
+import dev.panos.contentcalendar.repository.ContentCollectionRepository;
 import jakarta.validation.Valid;
 
 @RestController

@@ -1,4 +1,4 @@
-package dev.repository;
+package dev.panos.contentcalendar.repository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
