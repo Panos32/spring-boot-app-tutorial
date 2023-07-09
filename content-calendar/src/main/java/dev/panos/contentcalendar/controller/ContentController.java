@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import dev.panos.contentcalendar.model.Content;
-import dev.panos.contentcalendar.repository.ContentCollectionRepository;
+import dev.panos.contentcalendar.model.Status;
+import dev.panos.contentcalendar.repository.ContentRepository;
 import jakarta.validation.Valid;
 
 @RestController
@@ -24,14 +25,14 @@ import jakarta.validation.Valid;
 @CrossOrigin
 public class ContentController {
 
-    private ContentCollectionRepository repository;
+    private final ContentRepository repository;
 
 
-    public ContentController(ContentCollectionRepository repository){
+    public ContentController(ContentRepository repository){
         this.repository = repository;
     }
 
-    public ContentController(){}
+    //public ContentController(){}
 
     //make a request and find all the pieces of content in the system
     @GetMapping("")
@@ -64,7 +65,16 @@ public class ContentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(Integer id){
-        repository.delete(id);
+        repository.deleteById(id);
+    }
+
+    @GetMapping("/filter/{keyword}")
+    public List<Content> findByTitle(@PathVariable String keyword){
+        return repository.findAllByTitleContains(keyword);
     }
     
+    @GetMapping("/filter/status{status}")
+    public List<Content> findByStatus(@PathVariable Status status){
+        return repository.listByStatus(status);
+    }
 }
